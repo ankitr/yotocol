@@ -15,16 +15,36 @@ headers = {
 
 session_token = os.environ['YO_SESSION_TOKEN']
 
-
-def yo(u, n=1):
-    u = u.upper() # Yo doesn't do lowercase.
-    payload = {
-        "data": { "to": u },
-        "session_token": session_token,
-        "function": "yo"
-    }
-    for i in xrange(n):
-        r = requests.post(url, data=json.dumps(payload), headers=headers)
-        print(r.text)
-    return
-
+class Yo(object):
+    """A Yo user."""
+    def __init__(self):
+        super(Yo, self).__init__()
+    def login(self, username, password):
+        #TODO: this
+        pass
+    def make(self, username, password):
+        #TODO: this
+        pass
+    def yo(self, recipient, repetitions=1):
+        recipient = recipient.upper() # Yo doesn't do lowercase.
+        payload = {
+            'data': {'to':recipient},
+            'session_token': self.session_token,
+            'function': 'yo'
+        }
+        for i in xrange(repetitions):
+            r = requests.post(url, data=json.dumps(payload), headers=self.headers)
+            print(r.text)
+    def check(self, sender):
+        #TODO: this
+        # Returns the Firebase value and sets it to False.
+        return False
+    def headers(self):
+        return {
+            'Authorization': authorization,
+            'content-type': 'application/json'
+        }
+        
+    authorization = ''
+    session_token = ''
+    
